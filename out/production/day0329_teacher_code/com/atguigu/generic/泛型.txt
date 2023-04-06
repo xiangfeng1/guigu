@@ -1,0 +1,66 @@
+1、什么是泛型？
+语法：<类型> 就是泛型
+  例如：<T>，<E>，
+      <String>，<Integer>
+
+2、为什么要使用泛型？
+（1）把类型的检查和确定从运行时提前到了编译时
+（2）避免强制类型转换
+
+3、泛型用于两个地方：
+（1）类或接口名后面：把类名或接口名后面带<泛型>的类和接口称为泛型类或泛型接口
+java.lang.Comparable<T>
+java.util.Comparator<T>
+java.util.Collection<E>
+java.util.ArrayList<E>
+java.lang.Iterable<T>
+java.util.Iterator<T>
+java.util.function.Predicate<T>
+.....
+
+（2）方法中，在方法的返回值类型前面定义<泛型>
+【修饰符】 <泛型> 返回值类型 方法名(【形参列表】)throws 异常列表{
+
+}
+
+
+4、如何使用别人定义好的泛型类或泛型接口？（非常重要）
+（1）使用它们声明变量和创建对象
+以ArrayList<E>为例，<E>在整个ArrayList类中是用于表示元素的类型。
+e:element
+
+（2）继承它们或实现它们
+
+注意：
+A：泛型不支持基本数据类型，必须使用引用数据类型
+    如果是基本数据类型，必须使用包装类。
+B：JDK1.7之后，
+     ArrayList<Integer> list = new ArrayList<Integer>();
+     可以简化为
+      ArrayList<Integer> list = new ArrayList<>();
+
+5、自定义泛型类或泛型接口（了解）
+【修饰符】 class 类名<泛型>{
+
+}
+
+注意：
+（1）定义泛型时，通常选择单个的大写字母，一个单个大写字母代表一个未知的类型
+<T>
+<K,V>
+<T,U,R>
+
+案例：
+    定义一个学生类XueSheng，它包含姓名和成绩两个属性。
+    但是成绩的类型无法确定？
+    语文老师：
+        成绩：优秀、良好、及格等
+    英语老师：
+        成绩：A，B，C，D等
+    数学老师：
+        成绩：85.5,90.0等
+
+
+
+
+

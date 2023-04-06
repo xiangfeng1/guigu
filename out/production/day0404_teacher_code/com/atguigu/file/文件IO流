@@ -1,0 +1,27 @@
+FileInputStream：文件字节输入流，以字节为单位从文件中读取数据到当前程序
+FileOutputStream：文件字节输出流，以字节为单位把数据写到文件中，保存到文件中
+FileReader：文件字符输入流，以字符为单位从纯文本文件中读取数据到当前程序
+FileWriter：文件字符输出流，以字符为单位把当前程序中的数据写到纯文本文件中
+
+1、FileWriter：文件字符输出流
+2、FileReader：读
+3、FileInputStream：
+步骤：
+（1）先创建一个IO流对象
+    FileInputStream fis = new FileInputStream("iotest/atguigu.txt");
+（2）读取数据：调用read
+    int read()：一次读取一个字节，返回读取的字节值，如果已经到达流末尾，继续读，返回-1
+    int read(byte[] data)：一次读取多个字节，最多读取data.length个字节，返回本次读取的字节数量，如果已经到达流末尾，继续读，返回-1
+                读取的数据放到了data数组中，这个数据往往是一个重复使用的数组。
+（3）关闭资源
+    fis.close()
+
+4、FileOutputStream：
+步骤：
+（1）先创建一个IO流对象
+    FileOutputStream fos = new FileOutputStream("iotest/atguigu.txt");
+（2）输出数据：调用write
+    fos.write(字节数组)
+（3）关闭资源
+    fos.close()
+

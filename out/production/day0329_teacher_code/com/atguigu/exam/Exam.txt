@@ -1,0 +1,57 @@
+第1题：分别写出三代表示日期和时间的类型
+ java.util.Date：日期时间表示类
+ java.util.Calendar：日历
+ java.time.LocalDate、LocalTime、LocalDateTime：本地的日期、时间
+ java.time.Instant：表示系统时间
+ java.time.Period日期间隔、java.time.Duration时间间隔
+
+第2题：分别写出两个比较器的类型及其抽象方法
+ java.lang.Comparable接口：int compareTo(Object obj)
+ java.util.Comparator接口：int compare(Object o1, Object o2)
+
+第3题：写出进行数组操作的工具类（并列出至少5个常用方法）
+以及System类中关于数组操作的方法。
+
+数组操作的工具类：java.util.Arrays
+    排序：void sort(各种类型的数组)
+    二分查找：int binarySearch(各种类型的数组，查找目标)
+    复制：copyOf(各种类型的数组，新的长度)
+         copyOfRange(各种类型的数组，start, end)
+    拼接数组的元素：String toString(各种类型的数组 )
+    数组的比较：boolean equals(数组1,数组2)
+    数组填充：void fill(各种类型的数组组，值)
+
+System类中关于数组操作的方法：arraycopy(5个参数)
+                        arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
+
+第4题：写出包装类型
+byte<->Byte
+short<->Short
+int<->Integer
+long<->Long
+float<->Float
+double<->Double
+char<->Character
+boolean<->Boolean
+
+第5题
+1. charAt(int index)：返回[index]位置的字符
+2. length()：字符串的长度
+3. substring(int beginIndex, int endIndex)：字符串截取[beginIndex,endIndex)
+4. equals(Object obj)：判断两个字符串是否相等，严格区分大小写
+5. compareTo(String anotherString)：比较字符串的大小，严格区分大小写
+6. toLowerCase()：转小写
+7. toUpperCase()：转大写
+8. trim()：去掉前后空白
+9. startsWith(String prefix)：判断是否以xx开头
+10. endsWith(String suffix)：判断是否以xx结尾
+11. indexOf(int ch)、indexOf(String str) ：查看ch或str在当前字符串的下标，第一次出现的下标
+12. lastIndexOf(int ch)：查看ch或str在当前字符串的下标，最后一次出现的下标
+13. replace(char oldChar, char newChar)：把当前字符串中oldChar替换为新的newChar字符
+14. split(String regex)：拆分，根据regex分隔符把当前字符串拆分为多个字符串
+15. concat(String str)：拼接
+16. equalsIgnoreCase(String str):判断两个字符串是否相等，不区分大小写
+17. contains(String str):判断当前字符串中是否包含str
+18. getBytes(String charset):把当前字符串用charset字符编码方式编码为字节
+19. toCharArray():用char[]表示当前字符串
+20. intern():把某个字符串放到常量池中

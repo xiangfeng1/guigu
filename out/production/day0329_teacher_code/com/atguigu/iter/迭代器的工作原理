@@ -1,0 +1,36 @@
+1、关系：以ArrayList为例，在ArrayList中有一个内部类Itr，实现了Iterator接口，
+重写了Iterator接口的两个重写方法：
+boolean hasNext()
+E next()
+
+2、工作原理
+任意位置按Ctrl + N：搜索java.util.ArrayList
+ArrayList源码中Ctrl + F12：查看ArrayList的成员列表
+
+ArrayList是一种特殊的集合，它的底层是数组。
+ private class Itr implements Iterator<E> {
+        int cursor;       //游标，迭代器下一个要返回的元素的下标，或迭代器当前指向的元素的下标
+        int lastRet = -1; // 迭代器上一个遍历的元素下标
+                           //-1的意思是表示暂时不存在迭代器 上一个遍历的元素
+        int expectedModCount = modCount;
+                            //modCount是ArrayList集合用于记录 元素个数变化的次数
+                            //当ArrayList添加、删除元素时，modCount都会自增1
+                            //expectedModCount是Itr这个迭代器用于记录，迭代器准备遍历ArrayList的元素时，集合当前modCount的值
+ }
+
+hasNext()中cursor的值是表示本次要遍历的元素的下标
+next()中cursor会+1，表示指向下一次要遍历的元素的下标，本次要遍历的元素的下标给i
+            lastRet=i
+
+3、Java8之前Collection是没有removeIf方法，那么Collection的删除只有remove,removeAll,retainAll,clear等，
+那就无法完成根据“条件”删除元素了。
+为了实现可以根据“条件”删除元素，Iterator迭代器提供了一个remove方法，用于在Iterator遍历集合元素的过程中，
+判断元素是否满足xx条件，然后再删除该元素。
+
+
+结论：（一定要记住）
+    要从Collection集合中根据条件删除元素，首先考虑使用removeIf方法，
+    如果JDK是8之前的，那么在使用Iterator遍历集合并根据条件删除元素时，
+    切记切记要调用Iterator的remove方法，而不是Collection的remove方法。
+
+避免：在使用Iterator或foreach遍历集合过程中，调用集合的remove、add等方法。

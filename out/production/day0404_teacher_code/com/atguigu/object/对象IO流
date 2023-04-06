@@ -1,0 +1,53 @@
+两个对象IO流：
+1、ObjectInputStream
+2、ObjectOutputStream：输出各种数据类型的数据
+
+作用：
+1、读或写“基本数据类型”的各种数据
+2、读或写引用数据类型的“对象”
+
+注意：
+1、它们不能独立使用，必须依赖于其他的IO流。
+2、建议保存的文件后缀名自己命名，不要与现有的文件类型相同。
+3、用ObjectInputStream读数据的顺序需要与用ObjectOutputStream写数据的顺序一致。
+4、如果要用ObjectOutputStream输出引用数据类型的对象，要求该对象的类型必须实现java.io.Serializable接口
+
+对象的序列化：把Java对象转为字节数据输出，序列化的IO流：ObjectOutputStream
+对象的反序列化：把字节数据“重构”成一个Java对象，反序列化的IO流：ObjectInputStream
+
+5、当某个类实现了Serializable接口之后，如果没有明确指定“序列化版本ID”，
+那么每次修改类重新编译后都会自动产生1个新的“序列化版本ID”，
+如果类描述信息中的“序列化版本ID”不一致，是无法正确的反序列化的。
+解决：
+    必须给实现了Serializable接口的类（例如Student类）确定一个“序列化版本ID”。
+    “序列化版本ID”必须是private static final long serialVersionUID
+
+“序列化版本ID”的值为多少合适呢？
+（1）情况一：如果是第一次实现Serializable接口，该类的对象还没有被序列化过，那么“序列化版本ID”写什么值都可以。
+（2）情况二：之前已经实现Serializable接口，该类的对象已经被序列化过了，那么要让“序列化版本ID”和上一次序列化时的版本ID值一致
+例如：当我们修改了Student类之后，用这段程序重新读之前的stu.aaa文件，发生了如下异常：
+          java.io.InvalidClassException（无效的类异常）:
+           com.atguigu.object.Student; （Student类）
+           local class incompatible:（本地的 类 不兼容，不匹配）
+            stream classdesc serialVersionUID = 7049296973331162856, （流中的类描述信息中的序列化版本ID）  （上次序列化的版本ID值）
+            local class serialVersionUID = -1502441291691716068（本地的类描述信息中序列化版本ID）
+
+
+6、对象序列化，顾名思义，只针对“对象的实例变量”，不会针对类的“静态变量”，因为“静态变量”不属于某个对象，是属于类的。
+ 结论：static修饰的变量值不会被序列化
+
+7、不是对象的所有属性，或者所有的“实例变量值“都要进行序列化，有的时候有些数据是临时数据，有些数据是敏感数据（密码等）等，
+这些实例变量就需要加transient修饰。
+
+总结：static和transient修饰的成员变量不会序列化。
+
+案例：
+        String name = "巫师";
+        int age = 300;
+        char gender = '男';
+        int energy = 5000;
+        double price = 75.5;
+        boolean relive = true;
+
+案例：
+    Student类型的对象

@@ -1,0 +1,89 @@
+1、什么是集合？
+集合是代表一系列的数据结构，一系列的容器类型。
+Java中的容器：用来装Java的对象的。
+集合这些容器不装基本数据类型，如果遇到基本数据，会自动把它们装箱为包装类的对象。
+
+2、集合和数组有什么区别？
+数组：
+    比较单一的结构，长度是不可变，（如果要对数组进行扩容等操作，必须创建新数组）。
+    数组既支持基本数据类型的存储，又支持对象的存储。
+    实际开发中，一般存储对象选择集合，基本数据类型才选择数组。
+集合：
+    类型比较丰富，长度并没有限制。
+
+3、集合大致分为两大类：
+（1）以Collection为根接口的系列：存储一组对象的集合
+    例如：张三、李四、王五、赵六
+（2）以Map为根接口的系列：存储一组键值对的集合，键值对又称为映射关系。
+    键值对：(key,value)
+    例如：(张三,翠花)(王五,如花)
+
+
+4、java.util.Collection接口
+Collection 层次结构 中的根接口。Collection 表示一组对象，这些对象也称为 collection 的元素。
+一些 collection 允许有重复的元素，而另一些则不允许。
+一些 collection 是有序的，而另一些则是无序的。
+JDK 不提供此接口的任何直接 实现：
+它提供更具体的子接口（如 Set 和 List）实现。
+
+API：
+（1）增
+ boolean add(E e) ：添加一个对象到当前集合中
+ boolean addAll(Collection c) ：添加一组对象到当前集合中
+
+（2）删
+void clear() ：清空集合中所有的元素
+boolean remove(Object o) ：从当前集合中删除1个对象
+boolean removeAll(Collection c) ：从当前集合中删除一组对象
+        this集合 = this集合 - this集合 ∩ c集合
+boolean retainAll(Collection c) ：从当前集合中删除一组对象
+        this集合 = this集合 ∩ c集合
+boolean removeIf(Predicate filter) ：从当前集合中删除一组对象（Java8引入的）
+        this集合 = this集合 - this集合中满足 filter过滤条件的元素
+        Predicate是一个接口类型，它是java.util.function包，是Java8新增。
+        包含抽象方法：boolean test(T t)
+        调用removeIf方法时，必须传入一个Predicate接口的实现类对象，
+        通常使用匿名内部类来实现Predicate接口。
+
+（3）改（没有提供直接替换元素的方法）
+
+（4）查
+int size() ：元素个数
+boolean contains(Object o) ：判断当前集合中是否包含o对象
+boolean containsAll(Collection c) ：判断当前集合中是否包含c集合的所有元素
+    判断c是否是否是当前集合的“子集”
+boolean isEmpty() ：判断是否为空
+
+（5）遍历
+Object[] toArray() ：把集合中所有元素放到一个Object[]数组中返回，然后用遍历数组的方式遍历元素。
+    这种方式不是特别好。
+    为了遍历，还要创建一个新数组。
+Iterator iterator()：返回一个迭代器对象，用于遍历当前集合。
+   java.util.Iterator接口类型。 这个接口的实现类在Collection集合的实现类的内部定义。
+   例如：ArrayList是Collection接口的一个实现类，
+        在ArrayList中有一个内部类Itr，实现了Iterator接口。
+
+   当我们调用Collection接口的iterator()时，集合的实现类会重写iterator()方法，
+   并返回它自己内部的Iterator接口的实现类对象。
+   例如：ArrayList重写的iterator()方法，就返回了Itr的对象。
+
+   无论实现类在哪里定义，都需要重写Iterator接口的抽象方法。
+   boolean hasNext()：判断当前迭代器是否可以访问到元素，或者说，是否还有下一个元素可遍历
+   E next()  ：取出当前迭代器指向的元素，并且迭代器继续指向下一个元素
+
+5、JDK1.5之后，引入了一个新特性，一种新的语法糖
+增加for循环，或foreach循环。
+语法格式：
+for(元素的类型 元素名 : 数组或集合对象名){
+}
+元素名是我们自己命名的一个局部变量而已。
+
+如果是数组使用foreach，那么编译器仍然处理成普通的for循环。
+如果是集合使用foreach，那么编译器仍然处理成Iterator迭代器。
+
+问：是否是所有的集合都支持用Iterator迭代器遍历呢？
+    或者说是否是所有的集合都支持用foreach循环遍历呢？
+答案：不是。
+    只有实现了java.lang.Iterable接口，
+    因为只有实现这个接口，才能重写Iterator iterator()方法。
+

@@ -1,0 +1,13 @@
+1、缓冲IO流的类型：
+BufferedInputStream、BufferedOutputStream、BufferedReader、BufferedWriter
+
+2、缓冲IO流的作用
+（1）最基本的作用：给IO流增加缓冲效应，提高效率
+（2）BufferedReader、BufferedWriter可以给字符流增加一个辅助的功能，可以按行读、写
+
+3、注意
+（1）缓冲流无法独立使用，必须依赖于其他的IO流，例如文件IO流等
+（2）BufferedInputStream只能包装和处理InputStream系列的IO流
+    BufferedOutputStream只能包装和处理OutputStream系列的IO流
+    BufferedReader只能包装和处理Reader系列的IO流
+    BufferedWriter只能包装和处理Writer系列的IO流
